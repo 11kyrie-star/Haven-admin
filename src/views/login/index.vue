@@ -48,6 +48,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       loading.value = true;
       useUserStoreHook()
         .loginByUsername({
+          // 封装在store里面的登录方法
           username: ruleForm.username,
           password: ruleForm.password
         })
