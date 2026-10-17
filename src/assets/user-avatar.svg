@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="默认头像">
+  <defs>
+    <linearGradient id="haven-avatar-bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#7cb6ff" />
+      <stop offset="100%" stop-color="#4382e8" />
+    </linearGradient>
+  </defs>
+  <!-- 主蓝色圆底，浅深过渡增加层次 -->
+  <circle cx="100" cy="100" r="100" fill="url(#haven-avatar-bg)" />
+  <!-- 中性人像：纯色块剪影，无肤色、无性别特征 -->
+  <g fill="#ffffff">
+    <circle cx="100" cy="79" r="31" />
+    <path d="M100 121c-34 0-62 22-62 50 0 4 3 7 7 7h110c4 0 7-3 7-7 0-28-28-50-62-50z" />
+  </g>
+</svg>

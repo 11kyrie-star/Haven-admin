@@ -38,7 +38,7 @@ const { title } = useNav();
 
 const ruleForm = reactive({
   username: "admin",
-  password: "admin123"
+  password: "Admin@123456"
 });
 
 const onLogin = async (formEl: FormInstance | undefined) => {
@@ -53,7 +53,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
           password: ruleForm.password
         })
         .then(res => {
-          if (res.success) {
+          if (res.status===0) {
             // 获取后端路由
             return initRouter().then(() => {
               disabled.value = true;
