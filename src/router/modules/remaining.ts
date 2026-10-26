@@ -44,5 +44,5 @@ export default [
         component: () => import("@/layout/redirect.vue")
       }
     ]
-  }
+  },
 ] satisfies Array<RouteConfigsTable>;

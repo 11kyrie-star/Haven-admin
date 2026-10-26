@@ -7,7 +7,8 @@ interface Meta{
 
 interface ChildrenMeta{
   title:string,
-  rank:number
+  rank:number,
+  keepAlive:boolean
 }
 
 interface ChildrenData{
@@ -23,7 +24,6 @@ type Result = {
     {
       path:string,
       meta:Meta,
-      component:string,
       children:ChildrenData[]
     }
   ]

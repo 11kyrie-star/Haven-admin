@@ -35,7 +35,7 @@ export const useUserStore = defineStore("pure-user", {
       this.username = username;
     },
     SET_NICKNAME ( nickname : string ) { 
-      this . nickname = nickname;
+      this.nickname = nickname;
     },
     /** 存储角色 */
     SET_ROLES(roles: Array<string>) {
@@ -58,9 +58,11 @@ export const useUserStore = defineStore("pure-user", {
       return new Promise<UserResult>((resolve, reject) => {
         getLogin(data)
           .then(data => {
-            if (data?.status===0) setToken(data.data);
-            console.log(data)
-            resolve(data);
+            if (data?.status===0) {
+              setToken(data.data);
+              console.log(data)
+              resolve(data);
+          }
           })
           .catch(error => {
             reject(error);
