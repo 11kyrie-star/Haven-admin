@@ -122,7 +122,7 @@ const res=ref<getPostRes<PostList>>()
 if(!currentstatus){
      res.value=await getPostApi({page:page.value})
 }else{
-    res.value=await getPostApi({page:page.value,author:Forminfo.author,start_date:Forminfo.start_date,status:status.value})
+    res.value=await getPostApi({page:page.value,author:Forminfo.author,date:Forminfo.start_date,status:status.value})
 }
 if(currentid!==tag){return}
 if(res.value.status===0){
@@ -151,7 +151,7 @@ if(!doing.value){
     page.value=1 //重置page，不同条件下的page是不一样的，防止数据错乱
 }else{return}
 try{
-const res=await getPostApi({page:page.value,author:Forminfo.author,start_date:Forminfo.start_date,status:status.value})
+const res=await getPostApi({page:page.value,author:Forminfo.author,date:Forminfo.start_date,status:status.value})
 if(res.status===0){
     total.value=res.data.total
     tableData.value=res.data.list

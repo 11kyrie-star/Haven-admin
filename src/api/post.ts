@@ -42,7 +42,7 @@ export type DetailPost={
     status_text:string
 }
 //获取帖子的api
-export const getPostApi=(data:{page?:number,size?:number,keyword?:string,status?:'pending' | 'normal' | 'accepted' | 'multi_reported' | 'all' | '',author?:string,start_date?:string})=>{
+export const getPostApi=(data:{page?:number,size?:number,keyword?:string,status?:'pending' | 'normal' | 'accepted' | 'multi_reported' | 'all' | '',author?:string,date?:string})=>{
    return http.request<getPostRes<PostList>>("get","/posts",{params:data})
 }
 
