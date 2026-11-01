@@ -47,7 +47,7 @@
 
                     <!-- 一级管理员：提交审批 -->
                     <el-button
-                        v-perms="'post:offline:apply'"
+                        v-if="isFirstLevel"
                         size="small"
                         type="warning"
                         :disabled="!reason.trim()"
@@ -58,7 +58,7 @@
 
                     <!-- 其他管理员：直接确定 -->
                     <el-button
-                        v-perms="'post:offline'"
+                        v-if="!isFirstLevel"
                         size="small"
                         type="danger"
                         :disabled="!reason.trim()"

@@ -60,7 +60,6 @@ export const useUserStore = defineStore("pure-user", {
           .then(data => {
             if (data?.status===0) {
               setToken(data.data);
-              console.log(data)
               resolve(data);
           }
           })
