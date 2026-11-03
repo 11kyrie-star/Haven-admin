@@ -1,33 +1,39 @@
 <script setup lang="ts">
-import { computed, ref,onMounted } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { type DetailPost,getDetailPost } from "@/api/post";
+import { type DetailPost, getDetailPost } from "@/api/post";
+import DOMPurify from "dompurify";
 import Globe from "~icons/ri/earth-line";
 import Lock from "~icons/ri/lock-2-line";
 import { ElMessage } from "element-plus";
 
 defineOptions({ name: "Detail" });
-const route=useRoute()
-onMounted(async()=>{
-await getDetailData()
-})
+const route = useRoute();
+onMounted(async () => {
+  await getDetailData();
+});
 //获取帖子的函数
-const getDetailData=async()=>{
-const res=await getDetailPost(Number(route.params.id))
-if(res.status===0){
-    detail.value=res.data
-}else{
-    return ElMessage.warning("服务器或者网络异常")
-}
-}
+const getDetailData = async () => {
+  const res = await getDetailPost(Number(route.params.id));
+  if (res.status === 0) {
+    detail.value = res.data;
+  } else {
+    return ElMessage.warning("服务器或者网络异常");
+  }
+};
 
 /** TODO 业务逻辑：后续根据 route.params.id 请求详情接口，当前为写死的模拟数据 */
 const detail = ref<DetailPost>();
 
-/** 展示名称：昵称为空时回落到用户名 */
-const displayName = computed(
-  () => detail.value?.author
+/** 富文本正文：渲染前过滤，防止存储型 XSS */
+const safeContent = computed(() =>
+  DOMPurify.sanitize(detail.value?.content ?? "", {
+    USE_PROFILES: { html: true }
+  })
 );
+
+/** 展示名称：昵称为空时回落到用户名 */
+const displayName = computed(() => detail.value?.author);
 
 /** 根据图片数量决定九宫格列数：1 张单列，2/4 张两列，其余三列 */
 const galleryClass = computed(() => {
@@ -68,10 +74,7 @@ const statusTagType = computed(() => {
             class="visibility-badge"
             :class="detail?.is_public === 0 ? 'is-public' : 'is-private'"
           >
-            <Globe
-              v-if="detail?.is_public === 0"
-              class="visibility-icon"
-            />
+            <Globe v-if="detail?.is_public === 0" class="visibility-icon" />
             <Lock v-else class="visibility-icon" />
             {{ detail?.is_public === 0 ? "公开" : "私密" }}
           </span>
@@ -89,8 +92,8 @@ const statusTagType = computed(() => {
 
       <div class="note-divider" />
 
-      <!-- 注意：v-html 渲染后端富文本前务必做 XSS 过滤（如 DOMPurify），否则存在存储型 XSS 风险 -->
-      <section class="post-content" v-html="detail?.content" />
+      <!-- 正文为过滤后的富文本，防止存储型 XSS -->
+      <section class="post-content" v-html="safeContent" />
 
       <div
         v-if="detail?.images.length"
