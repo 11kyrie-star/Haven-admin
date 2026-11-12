@@ -4,7 +4,7 @@ import  {type reportData,getRportApi,handleReportApi ,rejectApi} from "@/api/rep
 import { hasPerms } from "@/utils/auth.js";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
-import { outApplyApi } from "@/api/post.js";
+import { outApplyApi, directOutApi } from "@/api/post.js";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import OutWindow from "./components/OutWindow.vue";
 import RejectWindow from "./components/RejectWindow.vue";
@@ -153,7 +153,7 @@ const handleOffline=async(post_id:number,reasons:string)=>{
         if(!hasPerms("post:offline")){
             return ElMessage.warning("您没有直接下架帖子的权限")
         }else{
-            try{const res=await outApplyApi(reasons,post_id)
+            try{const res=await directOutApi(reasons,post_id)
             if(res.status===0){
                 ElMessage.success(res.msg)
                 offlinevisible.value=false

@@ -79,6 +79,6 @@ export const outApplyApi=(reason:string,id:number)=>{
 }
 
 export const directOutApi=(reason:string,id:number)=>{
-    return http.request<directOutRes>("post",`/posts/${id}/offline`,{data:reason})
+    return http.request<directOutRes>("post",`/posts/${id}/offline`,{data:{reason}})
 }
 
