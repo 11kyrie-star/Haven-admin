@@ -72,11 +72,11 @@ const statusTagType = computed(() => {
         <div class="note-badges">
           <span
             class="visibility-badge"
-            :class="detail?.is_public === 0 ? 'is-public' : 'is-private'"
+            :class="detail?.is_public === 1 ? 'is-public' : 'is-private'"
           >
-            <Globe v-if="detail?.is_public === 0" class="visibility-icon" />
+            <Globe v-if="detail?.is_public === 1" class="visibility-icon" />
             <Lock v-else class="visibility-icon" />
-            {{ detail?.is_public === 0 ? "公开" : "私密" }}
+            {{ detail?.is_public === 1 ? "公开" : "私密" }}
           </span>
           <el-tag
             class="note-status"
